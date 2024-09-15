@@ -1,6 +1,19 @@
-@DrugDispenser_HostAddress = http://localhost:5179
+@DrugDispenser_HostAddress = https://localhost:7139
 
-GET {{DrugDispenser_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+Content-Type: application/json
+
+{
+  "IdNumber" :
+  {
+    "Number":"07018941125",
+    "Type": "D-Nummer"
+  },
+  "Code" :
+  {
+    "CodingSystem": "ICD-10",
+    "Id": "AA.75"
+  }
+}
 
 ###
