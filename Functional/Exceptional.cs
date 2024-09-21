@@ -2,7 +2,6 @@
 
 public class Exceptional<T> : Optional<T>
 {
-	public override bool IsValid => false;
 	public Exception Exception { get; }
 
 	private Exceptional(Exception exception)
@@ -11,4 +10,9 @@ public class Exceptional<T> : Optional<T>
 	}
 
 	public static implicit operator Exceptional<T>(Exception exception) => new(exception);
+}
+
+public partial class Optional<T>
+{
+	public static implicit operator Optional<T>(Exception exception) => (Exceptional<T>) exception;
 }

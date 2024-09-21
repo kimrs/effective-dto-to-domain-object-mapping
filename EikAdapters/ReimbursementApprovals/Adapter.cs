@@ -1,4 +1,5 @@
 ﻿using DrugDispenser.Domain.ReimbursementApprovals;
+using FluentValidation.Results;
 using Functional;
 
 namespace Eik.ReimbursementApprovals;
@@ -8,8 +9,8 @@ public class Adapter
 {
 	public Optional<Response> Handle(Request request)
 	{
-		return new Response();
+		// return new Response();
 		// return new NotImplementedException();
-		// return (Validational<Response>) new ValidationFailure("Hei", "padeg");
+		return new ValidationFailure("Hei", "padeg");
 	}
 }

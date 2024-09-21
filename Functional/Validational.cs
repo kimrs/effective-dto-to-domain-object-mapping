@@ -4,7 +4,6 @@ namespace Functional;
 
 public class Validational<T> : Optional<T>
 {
-    public override bool IsValid => false;
     public List<ValidationFailure> Failures { get; }
 
     private Validational(List<ValidationFailure> failures)
@@ -16,4 +15,11 @@ public class Validational<T> : Optional<T>
         => string.Join(", ", Failures.Select(x => x.ErrorMessage));
 
     public static implicit operator Validational<T>(List<ValidationFailure> validationFailure) => new (validationFailure);
+    public static implicit operator Validational<T>(ValidationFailure validationFailure) => new ([validationFailure]);
+}
+
+public partial class Optional<T>
+{
+	public static implicit operator Optional<T>(List<ValidationFailure> validationFailures) => (Validational<T>) validationFailures;
+    public static implicit operator Optional<T>(ValidationFailure validationFailure) => (Validational<T>) validationFailure;
 }

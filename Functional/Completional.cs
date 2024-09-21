@@ -2,7 +2,6 @@
 
 public class Completional<T> : Optional<T>
 {
-	public override bool IsValid => true;
 	public T Value { get; }
 
 	private Completional(T value)
@@ -11,4 +10,9 @@ public class Completional<T> : Optional<T>
 	}
 
 	public static implicit operator Completional<T>(T value) => new (value);
+}
+
+public partial class Optional<T>
+{
+	public static implicit operator Optional<T>(T value) => (Completional<T>) value;
 }
