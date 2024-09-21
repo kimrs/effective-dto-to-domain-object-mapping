@@ -1,0 +1,6 @@
+@ReimbursementApi_HostAddress = http://localhost:5200
+
+GET {{ReimbursementApi_HostAddress}}/reimbursementapproval/
+Accept: application/json
+
+###

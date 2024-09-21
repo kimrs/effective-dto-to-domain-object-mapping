@@ -1,13 +1,13 @@
-﻿using FluentValidation;
+﻿using DrugDispenser.Domain.ReimbursementApprovals;
+using DrugDispenser.ReimbursementApprovals.Requests;
+using FluentValidation;
+using Functional;
+using Functional.Operations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DrugDispenser;
+namespace DrugDispenser.ReimbursementApprovals;
 
-public record Code(string? CodingSystem, string? Id);
-public record IdNumber(string? Number, string? Type);
-public record Request(IdNumber? IdNumber, Code? Code);
-
-public class Validator : AbstractValidator<Request>
+public class Validator : AbstractValidator<Requests.Request>
 {
     public Validator()
     {
@@ -39,15 +39,18 @@ public class Validator : AbstractValidator<Request>
 
 [ApiController]
 [Route("Dispenser")]
-public class DispenserController : ControllerBase
+public class ReimbursementController(IAdapter adapter)
+    : ControllerBase
 {
     [HttpPost("Dispense")]
-    public IActionResult Dispense([FromBody] Request request)
-    {
-        var validationResult = new Validator().Validate(request);
-        
-        return validationResult.IsValid
-            ? Ok($"hello {request.IdNumber!.Number}")
-            : BadRequest(string.Join(Environment.NewLine, validationResult.Errors));
-    }
+    public IActionResult Dispense([FromBody] Requests.Request request)
+        => request
+            .ToDomain()
+            .Bind(adapter.Handle) switch
+            {
+                Completional<Response> c => Ok(c.Value),
+                Validational<Response> v => BadRequest(v.Failures),
+                Exceptional<Response> e => throw e.Exception,
+                _ => throw new Exception("Jeg liker ikke exceptions")
+            };
 }
