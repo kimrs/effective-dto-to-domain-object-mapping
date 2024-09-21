@@ -47,7 +47,7 @@ public class DispenserController : ControllerBase
         var validationResult = new Validator().Validate(request);
         
         return validationResult.IsValid
-            ? Ok($"hello {request.IdNumber.Number}")
+            ? Ok($"hello {request.IdNumber!.Number}")
             : BadRequest(string.Join(Environment.NewLine, validationResult.Errors));
     }
 }
