@@ -1,4 +1,5 @@
-﻿using Functional;
+﻿using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using Functional;
 
 namespace DrugDispenser.Domain.ReimbursementApprovals;
 

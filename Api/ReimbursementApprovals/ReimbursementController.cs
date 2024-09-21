@@ -43,9 +43,8 @@ public class ReimbursementController(IAdapter adapter)
     : ControllerBase
 {
     [HttpPost("Dispense")]
-    public IActionResult Dispense([FromBody] Requests.Request request)
-        => request
-            .ToDomain()
+    public IActionResult Dispense([FromBody] Requests.Request dto)
+        => dto.ToDomain()
             .Bind(adapter.Handle) switch
             {
                 Completional<Response> c => Ok(c.Value),
