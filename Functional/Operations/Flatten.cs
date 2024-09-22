@@ -2,21 +2,27 @@
 
 public static partial class Extensions
 {
-	// public static Validational<List<T>> Flatten<T>(
-	// 	this List<Validational<T>> values
-	// ) => values.SelectMany(x => x.Failures).ToList() is { Count: > 0 } failures
-	// 		? failures
-	// 		: values.Select(x => x.Value!).ToList();
-	//
-	// public static Validational<T[]> Flatten<T>(
-	// 	this Validational<T>[] values
-	// ) => values.SelectMany(x => x.Failures).ToList() is { Count: > 0 } failures
-	// 		? failures
-	// 		: values.Select(x => x.Value!).ToArray();
-	//
-	// public static Validational<T> Flatten<T>(
-	// 	this Validational<Validational<T>> vv
-	// ) => vv.IsValid
-	// 	? vv.Value!
-	// 	: vv.Failures.ToList();
+	public static Optional<List<T>> Flatten<T>(
+		this List<Optional<T>> values
+	)
+	{
+		if (values.OfType<Exceptional<T>>().Any())
+		{
+			return values
+				.OfType<Exceptional<T>>()
+				.First().Exception;
+		}
+
+		if (values.OfType<Validational<T>>().Any())
+		{
+			return values
+				.OfType<Validational<T>>()
+				.SelectMany(x => x.Failures).ToList();
+		}
+
+		return values
+			.OfType<Completional<T>>()
+			.Select(x => x.Value)
+			.ToList();
+	}
 }

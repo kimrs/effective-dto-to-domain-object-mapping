@@ -1,6 +1,16 @@
 ﻿namespace DrugDispenser.ReimbursementApprovals.Requests;
 
-public record Code(string? CodingSystem, string? Id);
-public record IdNumber(string? Number, string? Type);
-public record Request(IdNumber? IdNumber, Code? Code);
-	
+public record DrugPrescription(string? ItemNumber, string? PrescriberId);
+
+public record RetailPrescription(string? Name);
+
+public record Request(
+	string PatientId,
+	RetailPrescription? RetailPrescription,
+	DrugPrescription? DrugPrescription
+);
+
+/*
+ * If RetailPrescription is not null, we are dealing with 
+ *
+ */

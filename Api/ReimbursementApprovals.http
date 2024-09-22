@@ -4,16 +4,36 @@ POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
 Content-Type: application/json
 
 {
-  "IdNumber" :
+  "PatientId": "12345678",
+  "RetailPrescription" :
   {
-    "Number":"07018941125",
-    "Type": "D-Nummer"
-  },
-  "Code" :
-  {
-    "CodingSystem": "ICD-10",
-    "Id": "AA.75"
+    "Name": "Proteinshake"
   }
 }
 
 ###
+
+POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+Content-Type: application/json
+
+{
+  "PatientId": "12345678",
+  "DrugPrescription" :
+  {
+    "PrescriberId": "234567812",
+    "ItemNumber": "34252"
+  }
+}
+
+###
+
+POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+Content-Type: application/json
+
+{
+  "PatientId": "12345678",
+  "DrugPrescription" :
+  {
+    "ItemNumber": "34252"
+  }
+}

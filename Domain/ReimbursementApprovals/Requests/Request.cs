@@ -1,7 +1,9 @@
-﻿namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
+﻿using Functional;
+
+namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
 
 public record Request
 {
-	public static Unfinished Create(string patientId)
+	public static Optional<Unfinished> Create(string patientId)
 		=> Unfinished.Create(patientId);
 }
