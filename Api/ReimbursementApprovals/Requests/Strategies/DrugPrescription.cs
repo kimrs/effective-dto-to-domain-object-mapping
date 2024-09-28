@@ -5,12 +5,12 @@ using Functional;
 using Functional.Operations;
 using D = DrugDispenser.Domain.ReimbursementApprovals.Requests;
 
-namespace DrugDispenser.ReimbursementApprovals.Requests.Strategy;
+namespace DrugDispenser.ReimbursementApprovals.Requests.Strategies;
 
 public class DrugPrescription
 	: IStrategy
 {
-	public bool StrategyFor(Request r)
+	public bool For(Request r)
 		=> r is { RetailPrescription: null, DrugPrescription.PrescriberId: null };
 
 	public Optional<D.Request> ToDomain(Request dto)

@@ -1,24 +1,24 @@
 ﻿using DrugDispenser.Domain.ReimbursementApprovals;
-using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using Eik.Requests;
 using FluentValidation.Results;
 using Functional;
+using Functional.Operations;
+using Request = DrugDispenser.Domain.ReimbursementApprovals.Requests.Request;
+using Response = DrugDispenser.Domain.ReimbursementApprovals.Responses.Response;
 
 namespace Eik.ReimbursementApprovals;
 
 public class Adapter(HttpClient httpClient)
 	: IAdapter
 {
-	public async Task<Optional<Response>> Handle(Request request)
+	public Task<Optional<Response>> Handle(Request request)
 	{
-		using HttpResponseMessage response = await httpClient.PostAsync("d/d");
+		// request.ToDto().Bind(
+		// 	x => httpClient.PostAsync("https://localhost:5098", x)
+		// );
 		// return new Response();
 		// return new NotImplementedException();
 		
-		return new ValidationFailure("Hei", "padeg");
-	}
-
-	public Optional<Task<Response>> AHandle(Request request)
-	{
-		
+		return Task.FromResult<Optional<Response>>(new ValidationFailure("Hei", "padeg"));
 	}
 }

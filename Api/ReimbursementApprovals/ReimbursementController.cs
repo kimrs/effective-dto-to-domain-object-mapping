@@ -1,4 +1,5 @@
 ﻿using DrugDispenser.Domain.ReimbursementApprovals;
+using DrugDispenser.Domain.ReimbursementApprovals.Responses;
 using DrugDispenser.ReimbursementApprovals.Requests;
 using FluentValidation.Results;
 using Functional;

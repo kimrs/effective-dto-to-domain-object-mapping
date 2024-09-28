@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IAdapter, Adapter>();
+builder.Services.AddHttpClient("https://localhost:5098");
 
 var app = builder.Build();
 

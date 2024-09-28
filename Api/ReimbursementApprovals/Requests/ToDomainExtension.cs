@@ -1,4 +1,4 @@
-﻿using DrugDispenser.ReimbursementApprovals.Requests.Strategy;
+﻿using DrugDispenser.ReimbursementApprovals.Requests.Strategies;
 using Functional;
 using D = DrugDispenser.Domain.ReimbursementApprovals.Requests;
 
@@ -9,11 +9,11 @@ public static class TilDomeneExtension
 {
 	private static readonly IStrategy[] Strategies =
 	[
-		new Strategy.RetailPrescription(),
-		new Strategy.DrugPrescription(),
-		new Strategy.OpiatePrescription()
+		new Strategies.RetailPrescription(),
+		new Strategies.DrugPrescription(),
+		new OpiatePrescription()
 	];
 
 	public static Optional<D.Request> ToDomain(this Request dto)
-		=> Strategies.Single(x => x.StrategyFor(dto)).ToDomain(dto);
+		=> Strategies.Single(x => x.For(dto)).ToDomain(dto);
 }
