@@ -5,7 +5,7 @@ using Functional;
 
 namespace Eik.ReimbursementApprovals;
 
-public class Adapter
+public class Adapter()
 	: IAdapter
 {
 	public Optional<Response> Handle(Request request)

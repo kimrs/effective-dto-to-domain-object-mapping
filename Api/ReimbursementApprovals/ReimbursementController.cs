@@ -1,6 +1,5 @@
 ﻿using DrugDispenser.Domain.ReimbursementApprovals;
 using DrugDispenser.ReimbursementApprovals.Requests;
-using FluentValidation;
 using Functional;
 using Functional.Operations;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace DrugDispenser.ReimbursementApprovals;
 
 [ApiController]
-[Route("Dispenser")]
+[Route("Reimbursement")]
 public class ReimbursementController(IAdapter adapter)
     : ControllerBase
 {
-    [HttpPost("Dispense")]
+    [HttpPost("Approval")]
     public IActionResult Dispense([FromBody] Request dto)
         => dto.ToDomain()
             .Bind(adapter.Handle) switch

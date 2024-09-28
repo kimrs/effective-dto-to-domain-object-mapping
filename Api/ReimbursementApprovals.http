@@ -1,6 +1,8 @@
 @DrugDispenser_HostAddress = https://localhost:7139
 
-POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+### Medical Nutrition
+
+POST {{DrugDispenser_HostAddress}}/Reimbursement/Approval
 Content-Type: application/json
 
 {
@@ -11,9 +13,9 @@ Content-Type: application/json
   }
 }
 
-###
+### Opiate
 
-POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+POST {{DrugDispenser_HostAddress}}/Reimbursement/Approval
 Content-Type: application/json
 
 {
@@ -25,9 +27,9 @@ Content-Type: application/json
   }
 }
 
-###
+### Drug
 
-POST {{DrugDispenser_HostAddress}}/Dispenser/Dispense
+POST {{DrugDispenser_HostAddress}}/Reimbursement/Approval
 Content-Type: application/json
 
 {
@@ -36,4 +38,13 @@ Content-Type: application/json
   {
     "ItemNumber": "34252"
   }
+}
+
+###
+
+POST {{DrugDispenser_HostAddress}}/Reimbursement/Approval
+Content-Type: application/json
+
+{
+  "PatientId": "12345679"
 }
