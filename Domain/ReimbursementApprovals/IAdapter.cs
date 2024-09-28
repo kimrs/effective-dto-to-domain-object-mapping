@@ -5,5 +5,6 @@ namespace DrugDispenser.Domain.ReimbursementApprovals;
 
 public interface IAdapter
 {
-	Optional<Response> Handle(Request request);
+	Task<Optional<Response>> Handle(Request request);
+	Optional<Task<Response>> AHandle(Request request);
 }
