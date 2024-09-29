@@ -1,4 +1,4 @@
-﻿namespace Eik.Requests;
+﻿namespace Eik.ReimbursementApprovals.Requests;
 
 public record Request(
 	string PatientId,

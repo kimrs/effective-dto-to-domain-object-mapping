@@ -1,10 +1,10 @@
 ﻿using DrugDispenser.Domain.ReimbursementApprovals;
-using DrugDispenser.Domain.ReimbursementApprovals.Responses;
 using DrugDispenser.ReimbursementApprovals.Requests;
 using FluentValidation.Results;
 using Functional;
 using Functional.Operations;
 using Microsoft.AspNetCore.Mvc;
+using Request = DrugDispenser.Domain.ReimbursementApprovals.Request;
 
 namespace DrugDispenser.ReimbursementApprovals;
 
@@ -13,7 +13,7 @@ namespace DrugDispenser.ReimbursementApprovals;
 public class ReimbursementController(IAdapter adapter)
     : ControllerBase
 {
-    private Task<ActionResult> Handle(Domain.ReimbursementApprovals.Requests.Request request)
+    private Task<ActionResult> Handle(Request request)
         => adapter
             .Handle(request)
             .MatchAsync<Response, ActionResult>(
@@ -22,10 +22,10 @@ public class ReimbursementController(IAdapter adapter)
                 exception: _ => Problem());
             
     [HttpPost("Approval")]
-    public async Task<ActionResult> Approve([FromBody] Request dto)
+    public async Task<ActionResult> Approve([FromBody] Requests.Request dto)
     {
         return await dto.ToDomain()
-            .Match<Domain.ReimbursementApprovals.Requests.Request, Task<ActionResult>>(
+            .Match<Request, Task<ActionResult>>(
                 success: Handle,
                 invalid: x => Task.FromResult<ActionResult>(BadRequest(x)),
                 exception: _ => Task.FromResult<ActionResult>(Problem()));

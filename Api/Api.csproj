@@ -16,7 +16,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\EikAdapters\EikAdapters.csproj" />
+      <ProjectReference Include="..\Eik\Eik.csproj" />
     </ItemGroup>
 
 </Project>

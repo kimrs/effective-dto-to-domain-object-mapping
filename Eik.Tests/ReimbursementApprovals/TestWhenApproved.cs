@@ -1,6 +1,5 @@
 using DrugDispenser.Domain.ReimbursementApprovals;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
-using DrugDispenser.Domain.ReimbursementApprovals.Responses;
 using Eik.ReimbursementApprovals;
 using Functional.Operations;
 
@@ -25,11 +24,11 @@ public class TestWhenApproved
               "ReimbursementArticle": {
                 "V": "300",
                 "Dn": "§5-14 §3"
-              }
+              },
               "DailyDose":{
                 "V": "12",
                 "U": "OMEQ"
-              },
+              }
             }
           }
         }
@@ -38,11 +37,10 @@ public class TestWhenApproved
         var adapter = new Adapter(httpClient);
 
         var result = await Request.Create("12345")
-          .WithMedicalNutrition("App")
-          // .WithDrug("432")
+          //.WithMedicalNutrition("App")
+           .WithDrug("432")
           // .ThatIsOpiate("452")
           .BindAsync(x => adapter.Handle(x));
-        
   }
 
 	[Fact]

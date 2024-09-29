@@ -3,7 +3,8 @@ using Functional;
 
 namespace DrugDispenser.Domain.ReimbursementApprovals;
 
-public interface IAdapter
+public record Request
 {
-	Task<Optional<Response>> Handle(Request request);
+	public static Optional<Unfinished> Create(string patientId)
+		=> Unfinished.Create(patientId);
 }

@@ -4,15 +4,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "Functional\Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{3F37FA33-DE9A-4EA3-BBB0-0545548F66E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EikAdapters", "EikAdapters\EikAdapters.csproj", "{D3A8C55B-3052-4DCF-9545-3F3399AAE820}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eik", "Eik\Eik.csproj", "{D3A8C55B-3052-4DCF-9545-3F3399AAE820}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{FC17B5BE-9630-4415-B98D-AA8C01728D63}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eik", "Eik", "{448C1E8C-8C1A-40FC-A777-0D47E867F0FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EikServer", "EikServer", "{448C1E8C-8C1A-40FC-A777-0D47E867F0FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReimbursementApi", "ReimbursementApi\ReimbursementApi.csproj", "{F57A6505-3587-4A19-8AD2-80F6D9C220D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EikAdapters.Tests", "EikAdapters.Tests\EikAdapters.Tests.csproj", "{D887AAC0-4F91-4707-9DBF-144DB8560AAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eik.Tests", "Eik.Tests\Eik.Tests.csproj", "{D887AAC0-4F91-4707-9DBF-144DB8560AAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,6 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <RootNamespace>EikAdapters.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\EikAdapters\EikAdapters.csproj" />
+      <ProjectReference Include="..\Eik\Eik.csproj" />
     </ItemGroup>
 
 </Project>
