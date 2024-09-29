@@ -9,7 +9,7 @@ namespace EikAdapters.Tests.ReimbursementApprovals;
 public class TestWhenApproved
 {
 	[Fact]
-	public void ForOpiate()
+	public async Task ForOpiate()
 	{
         var httpClient = """
         {
@@ -27,8 +27,8 @@ public class TestWhenApproved
                 "Dn": "§5-14 §3"
               }
               "DailyDose":{
-                "v": "12",
-                "u": "OMEQ"
+                "V": "12",
+                "U": "OMEQ"
               },
             }
           }
@@ -37,11 +37,12 @@ public class TestWhenApproved
 
         var adapter = new Adapter(httpClient);
 
-        var d = Request.Create("12345")
-          .WithDrug("432")
-          .ThatIsOpiate("452");
-        var g = d
+        var result = await Request.Create("12345")
+          .WithMedicalNutrition("App")
+          // .WithDrug("432")
+          // .ThatIsOpiate("452")
           .BindAsync(x => adapter.Handle(x));
+        
   }
 
 	[Fact]
