@@ -9,10 +9,12 @@ public class Completional<T> : Optional<T>
 		Value = value;
 	}
 
-	public static implicit operator Completional<T>(T value) => new (value);
+	public static implicit operator Completional<T>(T value)
+		=> new (value);
 }
 
-public partial class Optional<T>
+public abstract partial class Optional<T>
 {
-	public static implicit operator Optional<T>(T value) => (Completional<T>) value;
+	public static implicit operator Optional<T>(T value)
+		=> (Completional<T>) value;
 }

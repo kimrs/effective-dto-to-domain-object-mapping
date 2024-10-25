@@ -1,4 +1,5 @@
-﻿using System.Runtime.Intrinsics.Arm;
+﻿using System.Collections.Immutable;
+using System.Runtime.Intrinsics.Arm;
 using FluentValidation.Results;
 
 namespace Functional.Operations;
@@ -25,7 +26,7 @@ public static partial class Extensions
 		_ => (t1, t2, t3).ToValidationFailures()
 	};
 
-	private static List<ValidationFailure> ToValidationFailures<T1, T2, T3>(this (Optional<T1> t1, Optional<T2> t2, Optional<T3> t3) o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2, T3>(this (Optional<T1> t1, Optional<T2> t2, Optional<T3> t3) o)
 		=> [..o.t1.ToValidationFailures(), ..o.t2.ToValidationFailures(), ..o.t3.ToValidationFailures()];
 	public static Optional<(TR1, TR2)> Combine<T, TR1, TR2>(
 		this T v,
@@ -44,10 +45,10 @@ public static partial class Extensions
 		_ => (t1, t2).ToValidationFailures()
 	};
 
-	private static List<ValidationFailure> ToValidationFailures<T1, T2>(this (Optional<T1> t1, Optional<T2> t2) o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2>(this (Optional<T1> t1, Optional<T2> t2) o)
 		=> [..o.t1.ToValidationFailures(), ..o.t2.ToValidationFailures()];
 
-	private static List<ValidationFailure> ToValidationFailures<T>(this Optional<T> o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T>(this Optional<T> o)
 		=> o is Validational<T> v
 			? v.Failures
 			: [];

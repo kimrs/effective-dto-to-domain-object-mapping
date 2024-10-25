@@ -7,7 +7,7 @@ public static partial class Extensions
 	public static TR Match<T, TR>(
 		this Optional<T> optional,
 		Func<T, TR> success,
-		Func<List<ValidationFailure>, TR> invalid,
+		Func<IEnumerable<ValidationFailure>, TR> invalid,
 		Func<Exception, TR> exception
 	) => optional switch
 	{
@@ -20,7 +20,7 @@ public static partial class Extensions
 	public static async Task<TR> MatchAsync<T, TR>(
 		this Task<Optional<T>> optional,
 		Func<T, TR> success,
-		Func<List<ValidationFailure>, TR> invalid,
+		Func<IEnumerable<ValidationFailure>, TR> invalid,
 		Func<Exception, TR> exception
 	) => await optional switch
 	{

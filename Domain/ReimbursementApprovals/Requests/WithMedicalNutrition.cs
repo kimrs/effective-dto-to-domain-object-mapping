@@ -3,7 +3,9 @@ using Functional.Operations;
 
 namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
 
-public record WithMedicalNutrition(string PatientId, string ApprovalType) : Request;
+public record WithMedicalNutrition(
+	PatientId PatientId,
+	string ApprovalType) : Request;
 
 public static partial class E
 {

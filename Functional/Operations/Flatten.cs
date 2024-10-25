@@ -1,4 +1,6 @@
-﻿namespace Functional.Operations;
+﻿using System.Collections.Immutable;
+
+namespace Functional.Operations;
 
 public static partial class Extensions
 {
@@ -17,7 +19,8 @@ public static partial class Extensions
 		{
 			return values
 				.OfType<Validational<T>>()
-				.SelectMany(x => x.Failures).ToList();
+				.SelectMany(x => x.Failures)
+				.ToImmutableList();
 		}
 
 		return values

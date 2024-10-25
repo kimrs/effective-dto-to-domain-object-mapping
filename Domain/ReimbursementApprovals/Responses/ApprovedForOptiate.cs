@@ -1,5 +1,4 @@
-﻿using DrugDispenser.Domain.Drug;
-using DrugDispenser.Domain.Drugs;
+﻿using DrugDispenser.Domain.Drugs;
 
 namespace DrugDispenser.Domain.ReimbursementApprovals.Responses;
 

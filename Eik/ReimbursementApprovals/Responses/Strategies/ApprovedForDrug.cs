@@ -1,4 +1,5 @@
-﻿using Functional;
+﻿using DrugDispenser.Domain;
+using Functional;
 using Functional.Operations;
 using Drugs = DrugDispenser.Domain.Drugs;
 
@@ -15,9 +16,9 @@ internal class ApprovedForDrug
 
     private Optional<Domain.Response> ToDomain(Approval dto)
         => dto.Combine(
-            x => x.ValidFrom.ToDomain(),
+            x => ApprovalDate.Create(x.ValidFrom!.Value),
             x => Drugs.Article.Create(x.ReimbursementArticle.V, x.ReimbursementArticle.Dn)
-        ).Bind<(DateTime validFrom, Drugs.Article article), Domain.Response>(
+        ).Bind<(ApprovalDate validFrom, Drugs.Article article), Domain.Response>(
             x => new Domain.Responses.ApprovedForDrug(x.validFrom, x.article)
         );
 }

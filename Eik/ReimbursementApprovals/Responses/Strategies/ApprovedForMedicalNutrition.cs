@@ -1,4 +1,5 @@
-﻿using Functional;
+﻿using DrugDispenser.Domain;
+using Functional;
 using Functional.Operations;
 using Drugs = DrugDispenser.Domain.Drugs;
 
@@ -14,9 +15,8 @@ internal class ApprovedForMedicalNutrition
         => ToDomain(dto.EikApi.Approval);
 
     private Optional<Domain.Response> ToDomain(Approval dto)
-        => dto.ValidFrom
-            .ToDomain()
-            .Bind<DateTime, Domain.Response>(
+        => ApprovalDate.Create(dto.ValidFrom!.Value)
+            .Bind<ApprovalDate, Domain.Response>(
                 x => new Domain.Responses.ApprovedForMedicalNutrition(x)
             );
 }

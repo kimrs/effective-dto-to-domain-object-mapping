@@ -4,7 +4,7 @@ using FluentValidation.Results;
 using Functional;
 using Functional.Operations;
 using Microsoft.AspNetCore.Mvc;
-using Request = DrugDispenser.Domain.ReimbursementApprovals.Request;
+using Request = DrugDispenser.Domain.ReimbursementApprovals.Requests.Request;
 
 namespace DrugDispenser.ReimbursementApprovals;
 

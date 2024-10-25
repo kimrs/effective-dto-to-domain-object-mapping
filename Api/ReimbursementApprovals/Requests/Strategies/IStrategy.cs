@@ -6,5 +6,5 @@ namespace DrugDispenser.ReimbursementApprovals.Requests.Strategies;
 public interface IStrategy
 {
 	bool For(Request r);
-	Optional<Domain.ReimbursementApprovals.Request> ToDomain(Request dto);
+	Optional<D.Request> ToDomain(Request dto);
 }

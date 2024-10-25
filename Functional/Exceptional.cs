@@ -9,10 +9,14 @@ public class Exceptional<T> : Optional<T>
 		Exception = exception;
 	}
 
-	public static implicit operator Exceptional<T>(Exception exception) => new(exception);
+	public static implicit operator Exceptional<T>(
+		Exception exception)
+		=> new(exception);
 }
 
-public partial class Optional<T>
+public abstract partial class Optional<T>
 {
-	public static implicit operator Optional<T>(Exception exception) => (Exceptional<T>) exception;
+	public static implicit operator Optional<T>(
+		Exception exception)
+		=> (Exceptional<T>) exception;
 }

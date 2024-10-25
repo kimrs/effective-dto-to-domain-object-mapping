@@ -1,6 +1,5 @@
 ﻿using DrugDispenser.ReimbursementApprovals.Requests.Strategies;
 using Functional;
-using D = DrugDispenser.Domain.ReimbursementApprovals.Requests;
 
 namespace DrugDispenser.ReimbursementApprovals.Requests;
 
@@ -14,6 +13,6 @@ public static class TilDomeneExtension
 		new OpiatePrescription()
 	];
 
-	public static Optional<Domain.ReimbursementApprovals.Request> ToDomain(this Request dto)
+	public static Optional<Domain.ReimbursementApprovals.Requests.Request> ToDomain(this Request dto)
 		=> Strategies.Single(x => x.For(dto)).ToDomain(dto);
 }

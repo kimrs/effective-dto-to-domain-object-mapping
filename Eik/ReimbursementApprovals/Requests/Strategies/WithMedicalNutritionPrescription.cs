@@ -5,10 +5,10 @@ namespace Eik.ReimbursementApprovals.Requests.Strategies;
 public class WithMedicalNutritionPrescription
 	: IStrategy
 {
-	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Request domain)
+	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is Domain.Requests.WithMedicalNutrition;
 
-	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Request domain)
+	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is Domain.Requests.WithMedicalNutrition withMedicalNutrition
 			? new Request(
 				PatientId: withMedicalNutrition.PatientId,

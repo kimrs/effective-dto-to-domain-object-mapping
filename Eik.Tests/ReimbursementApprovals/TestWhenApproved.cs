@@ -1,12 +1,20 @@
+using DrugDispenser.Domain;
+using DrugDispenser.Domain.Drugs;
 using DrugDispenser.Domain.ReimbursementApprovals;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
 using Eik.ReimbursementApprovals;
+using FluentAssertions;
+using Functional;
 using Functional.Operations;
 
 namespace EikAdapters.Tests.ReimbursementApprovals;
 
 public class TestWhenApproved
 {
+  public Optional<string> D()
+  {
+    return (Completional<string>)"hello";
+  }
 	[Fact]
 	public async Task ForOpiate()
 	{
@@ -35,89 +43,32 @@ public class TestWhenApproved
         """.AsResponseFromHttpClient();
 
         var adapter = new Adapter(httpClient);
+        var patientId = "12345".ToPatientId();
+        var itemNumber = "432".ToItemNumber();
+        var prescriberId = "kjsdhfas".ToPrescriberId();
 
-        var result = await Request.Create("12345")
-          //.WithMedicalNutrition("App")
-           .WithDrug("432")
-          // .ThatIsOpiate("452")
+        var result = await Request.Create(patientId)
+          .WithDrug(itemNumber)
+          //ThatIsNotOpiate()
+          .ThatIsOpiate(prescriberId)
           .BindAsync(x => adapter.Handle(x));
+        // _ = result is Completional<Response> {Value: ApprovedForOptiate approvedForOptiate};
+
+        result.Should().BeOfType<Completional<Response>>();
   }
+}
 
-	[Fact]
-	public void ForDrug()
-	{
-        var httpClient = """
-        {
-        "eikApi": {
-            "sokeresultat": {
-              "vedtak": [
-                {
-                  "erNaeringsmiddel": false,
-                  "gyldigFraDato": "2023-10-30T00:00:00.000Z",
-                  "meldingskode": 0,
-                  "refusjonskode": [
-                  {
-                    "v": "J45",
-                    "s": "7435",
-                    "dn": "Astma"
-                  }
-                  ],
-                  "refusjonshjemmel": [{"v":"300", "dn":"§5-14 §3"}],
-                  "vedtakStatus": {
-                    "v": "2",
-                    "dn": "Innvilget"
-                  },
-                  "dogndose":{
-                    "v": "12",
-                    "u": "OMEQ"
-                  },
-                  "fastlegeInformasjon": "Russiske dukker er selvopptatte"
-                }
-              ]
-            }
-          }
-        }
-        """.AsResponseFromHttpClient();
+internal static class E
+{
+  internal static PatientId ToPatientId(
+    this string patientId
+  ) => (PatientId.Create(patientId) as Completional<PatientId>)!.Value;
 
-        var adapter = new Adapter(httpClient);
-  }
-
-	[Fact]
-	public void ForMedicalNutrition()
-	{
-        var httpClient = """
-        {
-        "eikApi": {
-            "sokeresultat": {
-              "vedtak": [
-                {
-                  "erNaeringsmiddel": false,
-                  "gyldigFraDato": "2023-10-30T00:00:00.000Z",
-                  "meldingskode": 0,
-                  "refusjonskode": [
-                  {
-                    "v": "J45",
-                    "s": "7435",
-                    "dn": "Astma"
-                  }
-                  ],
-                  "refusjonshjemmel": [{"v":"300", "dn":"§5-14 §3"}],
-                  "vedtakStatus": {
-                    "v": "2",
-                    "dn": "Innvilget"
-                  },
-                  "dogndose":{
-                    "v": "12",
-                    "u": "OMEQ"
-                  },
-                  "fastlegeInformasjon": "Russiske dukker er selvopptatte"
-                }
-              ]
-            }
-          }
-        }
-        """.AsResponseFromHttpClient();
-
-        var adapter = new Adapter(httpClient);
-  }
+  internal static ItemNumber ToItemNumber(
+    this string itemNumber
+  ) => (ItemNumber.Create(itemNumber) as Completional<ItemNumber>)!.Value;
+  
+  internal static PrescriberId ToPrescriberId(
+    this string prescriberId
+  ) => (PrescriberId.Create(prescriberId) as Completional<PrescriberId>)!.Value;
 }

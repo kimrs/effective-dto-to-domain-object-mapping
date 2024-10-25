@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Functional;
 
-namespace DrugDispenser.Domain.Drug;
+namespace DrugDispenser.Domain.Drugs;
 
 public class PrescriberId
 {

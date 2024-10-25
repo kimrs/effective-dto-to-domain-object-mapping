@@ -1,25 +1,44 @@
+using System.Collections.Immutable;
 using FluentValidation.Results;
 
 namespace Functional;
 
 public class Validational<T> : Optional<T>
 {
-    public List<ValidationFailure> Failures { get; }
+    public ImmutableList<ValidationFailure> Failures { get; }
 
-    private Validational(List<ValidationFailure> failures)
+    private Validational(
+        IEnumerable<ValidationFailure> failures
+    )
     {
-        Failures = failures;
+        Failures = failures.ToImmutableList();
     }
 
     public override string ToString()
-        => string.Join(", ", Failures.Select(x => x.ErrorMessage));
+        => string.Join(", ",
+            Failures.Select(x => x.ErrorMessage));
 
-    public static implicit operator Validational<T>(List<ValidationFailure> validationFailure) => new (validationFailure);
-    public static implicit operator Validational<T>(ValidationFailure validationFailure) => new ([validationFailure]);
+    public static implicit operator Validational<T>(
+        List<ValidationFailure> validationFailure)
+        => new (validationFailure);
+    public static implicit operator Validational<T>(
+        ImmutableList<ValidationFailure> validationFailure)
+        => new (validationFailure);
+    public static implicit operator Validational<T>(
+        ValidationFailure validationFailure)
+        => new ([validationFailure]);
 }
 
-public partial class Optional<T>
+public abstract partial class Optional<T>
 {
-	public static implicit operator Optional<T>(List<ValidationFailure> validationFailures) => (Validational<T>) validationFailures;
-    public static implicit operator Optional<T>(ValidationFailure validationFailure) => (Validational<T>) validationFailure;
+	public static implicit operator Optional<T>(
+        List<ValidationFailure> validationFailures)
+        => (Validational<T>) validationFailures;
+    
+	public static implicit operator Optional<T>(
+        ImmutableList<ValidationFailure> validationFailures)
+        => (Validational<T>) validationFailures;
+    public static implicit operator Optional<T>(
+        ValidationFailure validationFailure)
+        => (Validational<T>) validationFailure;
 }

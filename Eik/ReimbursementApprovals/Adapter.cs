@@ -3,13 +3,14 @@ using System.Text.Json;
 using Eik.ReimbursementApprovals.Requests;
 using Eik.ReimbursementApprovals.Responses;
 using Functional;
+using Request = DrugDispenser.Domain.ReimbursementApprovals.Requests.Request;
 
 namespace Eik.ReimbursementApprovals;
 
 public class Adapter(HttpClient httpClient)
 	: Domain.IAdapter
 {
-	public async Task<Optional<Domain.Response>> Handle(Domain.Request request)
+	public async Task<Optional<Domain.Response>> Handle(Request request)
 	{
 		var dto = request.ToDto();
 		var json = JsonSerializer.Serialize(dto);

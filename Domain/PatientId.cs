@@ -1,22 +1,23 @@
-﻿using FluentValidation;
+﻿using System.Collections.Immutable;
+using FluentValidation;
 using Functional;
 
 namespace DrugDispenser.Domain;
 
 public class PatientId
 {
-	private readonly string? _value;
-	public static implicit operator string(PatientId o) => o._value!;
+	private readonly string _value;
+	public static implicit operator string(PatientId o) => o._value;
 	public static implicit operator Optional<PatientId>(PatientId s) => s.Validate();
 
 	public static Optional<PatientId> Create(
-		string? value
+		string value
 	) => new PatientId(value)
 		.Validate();
 
-	public override string ToString() => _value!;
+	public override string ToString() => _value;
 
-	private PatientId(string? value)
+	private PatientId(string value)
 	{
 		_value = value;
 	}

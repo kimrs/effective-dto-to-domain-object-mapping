@@ -1,5 +1,5 @@
 ﻿using DrugDispenser.Domain;
-using DrugDispenser.Domain.Drug;
+using DrugDispenser.Domain.Drugs;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
 using Functional;
 using Functional.Operations;
@@ -13,14 +13,14 @@ public class DrugPrescription
 	public bool For(Request r)
 		=> r is { RetailPrescription: null, DrugPrescription.PrescriberId: null };
 
-	public Optional<Domain.ReimbursementApprovals.Request> ToDomain(Request dto)
+	public Optional<D.Request> ToDomain(Request dto)
 		=> dto
 			.Combine(
 				x => PatientId.Create(x.PatientId),
-				x => ItemNumber.Create(x.DrugPrescription!.ItemNumber)
-			).Bind<(PatientId patientId, ItemNumber itemNumber), Domain.ReimbursementApprovals.Request>(
-				x => Domain.ReimbursementApprovals.Request
+				x => ItemNumber.Create(x.DrugPrescription!.ItemNumber!)
+			).Bind<(PatientId patientId, ItemNumber itemNumber), D.Request>(
+				x => D.Request
 					.Create(x.patientId)
 					.WithDrug(x.itemNumber)
-					.Bind<WithDrug, Domain.ReimbursementApprovals.Request>(x => x));
+					.Bind<WithDrug, D.Request>(y => y));
 }

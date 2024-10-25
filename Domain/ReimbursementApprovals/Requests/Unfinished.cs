@@ -2,12 +2,12 @@
 
 public record Unfinished
 {
-	public string PatientId { get; }
+	public PatientId PatientId { get; }
 	public static Unfinished Create(
-		string patientId
+		PatientId patientId
 	) => new(patientId);
 
-	private Unfinished(string patientId)
+	private Unfinished(PatientId patientId)
 	{
 		PatientId = patientId;
 	}
