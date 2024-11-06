@@ -5,36 +5,29 @@ namespace DrugDispenser.Domain.Retail;
 
 public class Name
 {
-	private readonly string? _value;
-	public static implicit operator string(Name o) => o._value!;
-	public static implicit operator Optional<Name>(Name s) => s.Validate();
+	private readonly string _value;
 
 	public static Optional<Name> Create(
-		string? value
-	) => new Name(value)
-		.Validate();
+		string value
+	)
+	{
+		var result = new Validator().Validate(value);
+		return result.IsValid
+			?  new Name(value)
+			: result.Errors;
+	}
 
-	public override string ToString() => _value!;
-
-	private Name(string? value)
+	private Name(string value)
 	{
 		_value = value;
 	}
 
-	private Optional<Name> Validate()
-	{
-		var result = new Validator().Validate(this);
-		return result.IsValid
-			? (Completional<Name>)this
-			: result.Errors;
-	}
-
 	private class Validator
-		: AbstractValidator<Name>
+		: AbstractValidator<string>
 	{
 		public Validator()
 		{
-			RuleFor(x => x._value)
+			RuleFor(x => x)
 				.NotEmpty()
 				.MaximumLength(30)
 				.MinimumLength(4)
