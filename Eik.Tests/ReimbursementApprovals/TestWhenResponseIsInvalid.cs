@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using DrugDispenser.Domain.ReimbursementApprovals;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 using DrugDispenser.Domain.ReimbursementApprovals.Responses;
 using Eik.ReimbursementApprovals;
 using FluentAssertions;
@@ -41,6 +42,7 @@ public class TestWhenResponseIsInvalid
 
         var result = await Request.Create("12345".ToPatientId())
            .WithDrug("432".ToItemNumber())
+           .ThatIsNotOpiate()
           .BindAsync(x => adapter.Handle(x));
 
         result.Should().BeOfType<Validational<Response>>();

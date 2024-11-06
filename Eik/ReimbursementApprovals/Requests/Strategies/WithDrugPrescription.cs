@@ -1,4 +1,5 @@
-﻿using Functional;
+﻿using DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
+using Functional;
 
 namespace Eik.ReimbursementApprovals.Requests.Strategies;
 
@@ -6,14 +7,14 @@ public class WithDrugPrescription
 	: IStrategy
 {
 	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
-		=> domain is Domain.Requests.WithDrug;
+		=> domain is ThatIsNotOpiate;
 
 	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
-		=> domain is Domain.Requests.WithDrug withDrug
+		=> domain is ThatIsNotOpiate request
 			? new Request(
-				PatientId: withDrug.PatientId,
+				PatientId: request.PatientId,
 				ApprovalType: null,
-				ItemNumber: withDrug.ItemNumber,
+				ItemNumber: request.ItemNumber,
 				PrescriberId: null
 			) : new NotSupportedException(domain.GetType().FullName);
 }

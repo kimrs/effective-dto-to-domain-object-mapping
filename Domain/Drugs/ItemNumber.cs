@@ -39,7 +39,6 @@ public class ItemNumber
 			: result.Errors;
 	}
 
-	// AbstractValidator for record med input parametre.
 	private class Validator
 		: AbstractValidator<ItemNumber>
 	{

@@ -2,6 +2,7 @@ using DrugDispenser.Domain;
 using DrugDispenser.Domain.Drugs;
 using DrugDispenser.Domain.ReimbursementApprovals;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 using Eik.ReimbursementApprovals;
 using FluentAssertions;
 using Functional;
@@ -49,8 +50,8 @@ public class TestWhenApproved
 
         var result = await Request.Create(patientId)
           .WithDrug(itemNumber)
-          //ThatIsNotOpiate()
-          .ThatIsOpiate(prescriberId)
+          .ThatIsNotOpiate()
+          // .ThatIsOpiate(prescriberId)
           .BindAsync(x => adapter.Handle(x));
         // _ = result is Completional<Response> {Value: ApprovedForOptiate approvedForOptiate};
 

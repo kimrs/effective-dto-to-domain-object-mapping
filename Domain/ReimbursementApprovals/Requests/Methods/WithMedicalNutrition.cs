@@ -1,7 +1,7 @@
 ﻿using Functional;
 using Functional.Operations;
 
-namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
+namespace DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 
 public record WithMedicalNutrition(
 	PatientId PatientId,
@@ -10,9 +10,9 @@ public record WithMedicalNutrition(
 public static partial class E
 {
 	public static Optional<WithMedicalNutrition> WithMedicalNutrition(
-		this Optional<Unfinished> request,
+		this Optional<Create> request,
 		string applicationType
-	) => request.Bind<Unfinished, WithMedicalNutrition>(
+	) => request.Bind<Create, WithMedicalNutrition>(
 		x => new WithMedicalNutrition(
 			x.PatientId,
 			applicationType));

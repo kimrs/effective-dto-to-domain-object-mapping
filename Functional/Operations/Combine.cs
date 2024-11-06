@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using System.Runtime.Intrinsics.Arm;
 using FluentValidation.Results;
 
 namespace Functional.Operations;

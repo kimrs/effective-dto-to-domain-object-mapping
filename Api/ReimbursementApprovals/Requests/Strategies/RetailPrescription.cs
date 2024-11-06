@@ -1,5 +1,6 @@
 ﻿using DrugDispenser.Domain;
 using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 using DrugDispenser.Domain.Retail;
 using Functional;
 using Functional.Operations;

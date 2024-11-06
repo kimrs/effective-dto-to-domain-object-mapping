@@ -1,9 +1,8 @@
-﻿
-using DrugDispenser.Domain.Drugs;
+﻿using DrugDispenser.Domain.Drugs;
 using Functional;
 using Functional.Operations;
 
-namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
+namespace DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 
 public record ThatIsOpiate(
 	PatientId PatientId,

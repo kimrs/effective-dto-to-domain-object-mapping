@@ -2,18 +2,18 @@
 using Functional;
 using Functional.Operations;
 
-namespace DrugDispenser.Domain.ReimbursementApprovals.Requests;
+namespace DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 
 public record WithDrug(
 	PatientId PatientId,
-	ItemNumber ItemNumber) : Request;
+	ItemNumber ItemNumber);
 
 public static partial class E
 {
 	public static Optional<WithDrug> WithDrug(
-		this Optional<Unfinished> request,
+		this Optional<Create> request,
 		ItemNumber itemNumber
-	) => request.Bind<Unfinished, WithDrug>(
+	) => request.Bind<Create, WithDrug>(
 		x => new WithDrug(
 			x.PatientId,
 			itemNumber));

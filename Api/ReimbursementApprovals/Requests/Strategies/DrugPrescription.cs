@@ -1,6 +1,6 @@
 ﻿using DrugDispenser.Domain;
 using DrugDispenser.Domain.Drugs;
-using DrugDispenser.Domain.ReimbursementApprovals.Requests;
+using DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 using Functional;
 using Functional.Operations;
 using D = DrugDispenser.Domain.ReimbursementApprovals.Requests;
@@ -22,5 +22,6 @@ public class DrugPrescription
 				x => D.Request
 					.Create(x.patientId)
 					.WithDrug(x.itemNumber)
-					.Bind<WithDrug, D.Request>(y => y));
+					.ThatIsNotOpiate()
+					.Bind<ThatIsNotOpiate, D.Request>(y => y));
 }
