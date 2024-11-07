@@ -13,7 +13,7 @@ public class WithMedicalNutritionPrescription
 		=> domain is WithMedicalNutrition withMedicalNutrition
 			? new Request(
 				PatientId: withMedicalNutrition.PatientId,
-				ApprovalType: withMedicalNutrition.ApprovalType,
+				Name: withMedicalNutrition.Name.ToString(),
 				ItemNumber: null,
 				PrescriberId: null
 			) : new NotSupportedException(domain.GetType().FullName);

@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-
+﻿
 namespace Functional.Operations;
 
 public static partial class Extensions

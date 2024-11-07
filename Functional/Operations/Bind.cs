@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-
+﻿
 namespace Functional.Operations;
 
 public static partial class Extensions

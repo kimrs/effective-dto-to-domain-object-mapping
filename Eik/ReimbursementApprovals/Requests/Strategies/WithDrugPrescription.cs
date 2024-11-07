@@ -6,15 +6,15 @@ namespace Eik.ReimbursementApprovals.Requests.Strategies;
 public class WithDrugPrescription
 	: IStrategy
 {
-	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
+	public bool For(Domain.Requests.Request domain)
 		=> domain is ThatIsNotOpiate;
 
-	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
+	public Optional<Request> ToDto(Domain.Requests.Request domain)
 		=> domain is ThatIsNotOpiate request
 			? new Request(
 				PatientId: request.PatientId,
-				ApprovalType: null,
-				ItemNumber: request.ItemNumber,
+				Name: null,
+				ItemNumber: request.ItemNumber.ToMachingeReadable(),
 				PrescriberId: null
 			) : new NotSupportedException(domain.GetType().FullName);
 }

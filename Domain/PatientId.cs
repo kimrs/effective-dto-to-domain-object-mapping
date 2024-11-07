@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using FluentValidation;
+﻿using FluentValidation;
 using Functional;
 
 namespace DrugDispenser.Domain;

@@ -2,7 +2,7 @@
 
 public record Request(
 	string PatientId,
-	string? ApprovalType,
+	string? Name,
 	string? ItemNumber,
 	string? PrescriberId
 );

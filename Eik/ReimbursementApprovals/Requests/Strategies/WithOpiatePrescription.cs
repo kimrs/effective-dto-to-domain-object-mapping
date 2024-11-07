@@ -13,8 +13,8 @@ public class WithOpiatePrescription
 		=> domain is ThatIsOpiate thatIsOpiate
 			? new Request(
 				PatientId: thatIsOpiate.PatientId,
-				ApprovalType: null,
-				ItemNumber: thatIsOpiate.ItemNumber,
+				Name: null,
+				ItemNumber: $"{thatIsOpiate.ItemNumber:M}",
 				PrescriberId: thatIsOpiate.PrescriberId
 			) : new NotSupportedException(domain.GetType().FullName);
 }

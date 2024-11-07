@@ -1,7 +1,6 @@
 ﻿using DrugDispenser.Domain;
 using Functional;
 using Functional.Operations;
-using Drugs = DrugDispenser.Domain.Drugs;
 
 namespace Eik.ReimbursementApprovals.Responses.Strategies;
 
