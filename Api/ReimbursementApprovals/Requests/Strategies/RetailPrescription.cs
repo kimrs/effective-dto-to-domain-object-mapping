@@ -17,7 +17,7 @@ public class RetailPrescription
 	public Optional<D.Request> ToDomain(Request dto)
 		=> dto.Combine(
 			x => PatientId.Create(x.PatientId),
-			x => Name.Create(x.RetailPrescription!.Name)
+			x => Name.Create(x.RetailPrescription!.Name!)
 		).Bind<(PatientId patientId, Name name), D.Request>(
 			x => D.Request
 				.Create(x.patientId)

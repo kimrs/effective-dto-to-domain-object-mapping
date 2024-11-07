@@ -9,8 +9,3 @@ public record Request(
 	RetailPrescription? RetailPrescription,
 	DrugPrescription? DrugPrescription
 );
-
-/*
- * If RetailPrescription is not null, we are dealing with 
- *
- */

@@ -20,7 +20,7 @@ public class ReimbursementController(IAdapter adapter)
                 success: Ok,
                 invalid: _ => Problem(),
                 exception: _ => Problem());
-            
+
     [HttpPost("Approval")]
     public async Task<ActionResult> Approve([FromBody] Requests.Request dto)
     {
