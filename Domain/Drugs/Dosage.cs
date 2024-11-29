@@ -8,7 +8,7 @@ public record Dosage
     public string Amount { get; }
     public string Unit { get; }
 
-    public static Optional<Dosage> Create(string amount, string unit)
+    public static Result<Dosage> Create(string amount, string unit)
     {
 	    Dosage dosage = new(amount, unit);
 	    return dosage.Validate();
@@ -20,7 +20,7 @@ public record Dosage
 	    Unit = unit;
     }
 
-	private Optional<Dosage> Validate()
+	private Result<Dosage> Validate()
 	{
 		var result = new Validator().Validate(this);
 		return result.IsValid

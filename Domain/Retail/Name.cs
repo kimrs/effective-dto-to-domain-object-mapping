@@ -7,7 +7,7 @@ public class Name
 {
 	private readonly string _value;
 
-	public static Optional<Name> Create(
+	public static Result<Name> Create(
 		string value
 	)
 	{

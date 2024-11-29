@@ -7,5 +7,5 @@ internal interface IStrategy
 {
     bool For(Response dto);
     
-    Optional<Domain.Response> ToDomain(Response dto);
+    Result<Domain.Response> ToDomain(Response dto);
 }

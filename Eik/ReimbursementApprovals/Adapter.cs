@@ -10,7 +10,7 @@ namespace Eik.ReimbursementApprovals;
 public class Adapter(HttpClient httpClient)
 	: Domain.IAdapter
 {
-	public async Task<Optional<Domain.Response>> Handle(Request request)
+	public async Task<Result<Domain.Response>> Handle(Request request)
 	{
 		var dto = request.ToDto();
 		var json = JsonSerializer.Serialize(dto);

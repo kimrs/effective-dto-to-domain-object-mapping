@@ -13,15 +13,15 @@ public class DrugPrescription
 	public bool For(Request r)
 		=> r is { RetailPrescription: null, DrugPrescription.PrescriberId: null };
 
-	public Optional<D.Request> ToDomain(Request dto)
+	public Result<D.Request> ToDomain(Request dto)
 		=> dto
 			.Combine(
 				x => PatientId.Create(x.PatientId),
 				x => ItemNumber.Create(x.DrugPrescription!.ItemNumber!)
-			).Bind<(PatientId patientId, ItemNumber itemNumber), D.Request>(
+			).Then<(PatientId patientId, ItemNumber itemNumber), D.Request>(
 				x => D.Request
 					.Create(x.patientId)
 					.WithDrug(x.itemNumber)
 					.ThatIsNotOpiate()
-					.Bind<ThatIsNotOpiate, D.Request>(y => y));
+					.Then<ThatIsNotOpiate, D.Request>(y => y));
 }

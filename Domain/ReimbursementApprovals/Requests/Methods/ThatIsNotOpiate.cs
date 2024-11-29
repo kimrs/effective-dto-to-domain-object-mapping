@@ -11,9 +11,9 @@ public record ThatIsNotOpiate(
 
 public static partial class E
 {
-    public static Optional<ThatIsNotOpiate> ThatIsNotOpiate(
-        this Optional<WithDrug> request
-    ) => request.Bind<WithDrug, ThatIsNotOpiate>(
+    public static Result<ThatIsNotOpiate> ThatIsNotOpiate(
+        this Result<WithDrug> request
+    ) => request.Then<WithDrug, ThatIsNotOpiate>(
         x => new ThatIsNotOpiate(
             x.PatientId,
             x.ItemNumber));

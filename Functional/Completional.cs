@@ -1,6 +1,6 @@
 ﻿namespace Functional;
 
-public class Completional<T> : Optional<T>
+public class Completional<T> : Result<T>
 {
 	public T Value { get; }
 
@@ -13,8 +13,8 @@ public class Completional<T> : Optional<T>
 		=> new (value);
 }
 
-public abstract partial class Optional<T>
+public abstract partial class Result<T>
 {
-	public static implicit operator Optional<T>(T value)
-		=> (Completional<T>) value;
+	public static implicit operator Result<T>(T value)
+		=> (Completional<T>)  value;
 }

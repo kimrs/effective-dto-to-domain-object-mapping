@@ -1,6 +1,6 @@
 ﻿namespace Functional;
 
-public class Exceptional<T> : Optional<T>
+public class Exceptional<T> : Result<T>
 {
 	public Exception Exception { get; }
 
@@ -14,9 +14,9 @@ public class Exceptional<T> : Optional<T>
 		=> new(exception);
 }
 
-public abstract partial class Optional<T>
+public abstract partial class Result<T>
 {
-	public static implicit operator Optional<T>(
+	public static implicit operator Result<T>(
 		Exception exception)
 		=> (Exceptional<T>) exception;
 }

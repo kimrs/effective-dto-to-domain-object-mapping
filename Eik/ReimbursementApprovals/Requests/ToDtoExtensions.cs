@@ -12,7 +12,7 @@ public static class ToDtoExtensions
 		new WithOpiatePrescription()
 	];
 
-	public static Optional<Request> ToDto(this DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
+	public static Result<Request> ToDto(this DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> Strategies.Single(x => x.For(domain))
 			.ToDto(domain);
 

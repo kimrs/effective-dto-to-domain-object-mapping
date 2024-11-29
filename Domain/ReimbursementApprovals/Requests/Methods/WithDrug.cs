@@ -6,14 +6,14 @@ namespace DrugDispenser.Domain.ReimbursementApprovals.Requests.Methods;
 
 public record WithDrug(
 	PatientId PatientId,
-	ItemNumber ItemNumber);
+	ItemNumber ItemNumber) : Unfinished;
 
 public static partial class E
 {
-	public static Optional<WithDrug> WithDrug(
-		this Optional<Create> request,
+	public static Result<WithDrug> WithDrug(
+		this Result<Create> request,
 		ItemNumber itemNumber
-	) => request.Bind<Create, WithDrug>(
+	) => request.Then<Create, WithDrug>(
 		x => new WithDrug(
 			x.PatientId,
 			itemNumber));

@@ -3,7 +3,7 @@ using FluentValidation.Results;
 
 namespace Functional;
 
-public class Validational<T> : Optional<T>
+public class Validational<T> : Result<T>
 {
     public ImmutableList<ValidationFailure> Failures { get; }
 
@@ -29,16 +29,16 @@ public class Validational<T> : Optional<T>
         => new ([validationFailure]);
 }
 
-public abstract partial class Optional<T>
+public abstract partial class Result<T>
 {
-	public static implicit operator Optional<T>(
+	public static implicit operator Result<T>(
         List<ValidationFailure> validationFailures)
         => (Validational<T>) validationFailures;
     
-	public static implicit operator Optional<T>(
+	public static implicit operator Result<T>(
         ImmutableList<ValidationFailure> validationFailures)
         => (Validational<T>) validationFailures;
-    public static implicit operator Optional<T>(
+    public static implicit operator Result<T>(
         ValidationFailure validationFailure)
         => (Validational<T>) validationFailure;
 }

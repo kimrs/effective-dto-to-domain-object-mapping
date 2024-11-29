@@ -27,7 +27,7 @@ internal class Validator : AbstractValidator<Response>
 
 internal static class E
 {
-    public static Optional<Response> Validate(
+    public static Result<Response> Validate(
         this Response response
     )
     {

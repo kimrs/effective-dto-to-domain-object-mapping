@@ -9,7 +9,7 @@ public class WithDrugPrescription
 	public bool For(Domain.Requests.Request domain)
 		=> domain is ThatIsNotOpiate;
 
-	public Optional<Request> ToDto(Domain.Requests.Request domain)
+	public Result<Request> ToDto(Domain.Requests.Request domain)
 		=> domain is ThatIsNotOpiate request
 			? new Request(
 				PatientId: request.PatientId,

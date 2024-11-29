@@ -9,7 +9,7 @@ public class WithOpiatePrescription
 	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is ThatIsOpiate;
 
-	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
+	public Result<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is ThatIsOpiate thatIsOpiate
 			? new Request(
 				PatientId: thatIsOpiate.PatientId,

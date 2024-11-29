@@ -7,9 +7,9 @@ public class PatientId
 {
 	private readonly string _value;
 	public static implicit operator string(PatientId o) => o._value;
-	public static implicit operator Optional<PatientId>(PatientId s) => s.Validate();
+	public static implicit operator Result<PatientId>(PatientId s) => s.Validate();
 
-	public static Optional<PatientId> Create(
+	public static Result<PatientId> Create(
 		string value
 	) => new PatientId(value)
 		.Validate();
@@ -21,7 +21,7 @@ public class PatientId
 		_value = value;
 	}
 
-	private Optional<PatientId> Validate()
+	private Result<PatientId> Validate()
 	{
 		var result = new Validator().Validate(this);
 		return result.IsValid

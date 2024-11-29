@@ -5,20 +5,20 @@ namespace Functional.Operations;
 public static partial class Extensions
 {
 	public static TR Match<T, TR>(
-		this Optional<T> optional,
+		this Result<T> result,
 		Func<T, TR> success,
 		Func<IEnumerable<ValidationFailure>, TR> invalid,
 		Func<Exception, TR> exception
-	) => optional switch
+	) => result switch
 	{
 		Completional<T> c => success(c.Value),
 		Validational<T> v => invalid(v.Failures),
 		Exceptional<T> e => exception(e.Exception),
-		_ => exception(new ArgumentOutOfRangeException(nameof(optional)))
+		_ => exception(new ArgumentOutOfRangeException(nameof(result)))
 	};
 
 	public static async Task<TR> MatchAsync<T, TR>(
-		this Task<Optional<T>> optional,
+		this Task<Result<T>> optional,
 		Func<T, TR> success,
 		Func<IEnumerable<ValidationFailure>, TR> invalid,
 		Func<Exception, TR> exception

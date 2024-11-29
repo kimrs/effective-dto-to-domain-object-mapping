@@ -12,10 +12,10 @@ public record ThatIsOpiate(
 
 public static partial class E
 {
-	public static Optional<ThatIsOpiate> ThatIsOpiate(
-		this Optional<WithDrug> request,
+	public static Result<ThatIsOpiate> ThatIsOpiate(
+		this Result<WithDrug> request,
 		PrescriberId prescriberId
-	) => request.Bind<WithDrug, ThatIsOpiate>(
+	) => request.Then<WithDrug, ThatIsOpiate>(
 		x => new ThatIsOpiate(
 			x.PatientId,
 			x.ItemNumber,

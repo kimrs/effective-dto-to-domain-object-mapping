@@ -7,9 +7,9 @@ public class ApprovalDate
 {
 	private readonly DateTime _value;
 	public static implicit operator DateTime(ApprovalDate o) => o._value;
-	public static implicit operator Optional<ApprovalDate>(ApprovalDate d) => d.Validate();
+	public static implicit operator Result<ApprovalDate>(ApprovalDate d) => d.Validate();
 
-	public static Optional<ApprovalDate> Create(
+	public static Result<ApprovalDate> Create(
 		DateTime value
 	) => new ApprovalDate(value)
 		.Validate();
@@ -19,7 +19,7 @@ public class ApprovalDate
 		_value = value;
 	}
 
-	private Optional<ApprovalDate> Validate()
+	private Result<ApprovalDate> Validate()
 	{
 		var result = new Validator().Validate(this);
 		return result.IsValid

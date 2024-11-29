@@ -9,7 +9,7 @@ public class WithMedicalNutritionPrescription
 	public bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is WithMedicalNutrition;
 
-	public Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
+	public Result<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain)
 		=> domain is WithMedicalNutrition withMedicalNutrition
 			? new Request(
 				PatientId: withMedicalNutrition.PatientId,

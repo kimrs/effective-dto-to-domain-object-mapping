@@ -13,8 +13,8 @@ public static class ToDomainExtensions
 		new ApprovedForOpiate(),
 	];
 
-	internal static Optional<Domain.Response> ToDomain(
+	internal static Result<Domain.Response> ToDomain(
 		this Response dto
 	) => dto.Validate()
-		.Bind(x => Strategies.Single(y => y.For(x)).ToDomain(x));
+		.Then(x => Strategies.Single(y => y.For(x)).ToDomain(x));
 }

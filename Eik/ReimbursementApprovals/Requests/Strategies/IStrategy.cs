@@ -6,5 +6,5 @@ public interface IStrategy
 {
 	bool For(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain);
 
-	Optional<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain);
+	Result<Request> ToDto(DrugDispenser.Domain.ReimbursementApprovals.Requests.Request domain);
 }

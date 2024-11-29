@@ -13,6 +13,6 @@ public static class TilDomeneExtension
 		new OpiatePrescription()
 	];
 
-	public static Optional<Domain.ReimbursementApprovals.Requests.Request> ToDomain(this Request dto)
+	public static Result<Domain.ReimbursementApprovals.Requests.Request> ToDomain(this Request dto)
 		=> Strategies.Single(x => x.For(dto)).ToDomain(dto);
 }

@@ -14,7 +14,7 @@ public record Article
     public static Article A200S5 = new("200", "§5-14 §3");
     public static Article A250S2 = new("250", "§2-10");
 
-    public static Optional<Article> Create(string nr, string section)
+    public static Result<Article> Create(string nr, string section)
     {
 	    Article article = new(nr, section);
 	    return article.Validate();
@@ -26,7 +26,7 @@ public record Article
         Section = section;
     }
 
-	private Optional<Article> Validate()
+	private Result<Article> Validate()
 	{
 		var result = new Validator().Validate(this);
 		return result.IsValid

@@ -10,10 +10,10 @@ public record WithMedicalNutrition(
 
 public static partial class E
 {
-	public static Optional<WithMedicalNutrition> WithMedicalNutrition(
-		this Optional<Create> request,
+	public static Result<WithMedicalNutrition> WithMedicalNutrition(
+		this Result<Create> request,
 		Name name
-	) => request.Bind<Create, WithMedicalNutrition>(
+	) => request.Then<Create, WithMedicalNutrition>(
 		x => new WithMedicalNutrition(
 			x.PatientId,
 			name));

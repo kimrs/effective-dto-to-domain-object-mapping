@@ -7,9 +7,9 @@ public class ItemNumber : IFormattable
 {
 	private readonly string _value;
 	public static implicit operator string(ItemNumber o) => o._value;
-	public static implicit operator Optional<ItemNumber>(ItemNumber s) => (Completional<ItemNumber>)s;
+	public static implicit operator Result<ItemNumber>(ItemNumber s) => (Completional<ItemNumber>)s;
 
-	public static Optional<ItemNumber> Create(
+	public static Result<ItemNumber> Create(
 		string value
 	)
 	{

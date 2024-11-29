@@ -5,17 +5,17 @@ namespace Functional.Operations;
 
 public static partial class Extensions
 {
-	public static Optional<(TR1, TR2, TR3)> Combine<T, TR1, TR2, TR3>(
+	public static Result<(TR1, TR2, TR3)> Combine<T, TR1, TR2, TR3>(
 		this T v,
-		Func<T, Optional<TR1>> f1,
-		Func<T, Optional<TR2>> f2,
-		Func<T, Optional<TR3>> f3
+		Func<T, Result<TR1>> f1,
+		Func<T, Result<TR2>> f2,
+		Func<T, Result<TR3>> f3
 	) => Combine(f1(v), f2(v), f3(v));
 
-	private static Optional<(T1, T2, T3)> Combine<T1, T2, T3>(
-		Optional<T1> t1,
-		Optional<T2> t2,
-		Optional<T3> t3
+	private static Result<(T1, T2, T3)> Combine<T1, T2, T3>(
+		Result<T1> t1,
+		Result<T2> t2,
+		Result<T3> t3
 	) => (t1, t2, t3) switch
 	{
 		 { t1: Completional<T1> c1, t2: Completional<T2> c2, t3: Completional<T3> c3 }  => (c1.Value, c2.Value, c3.Value),
@@ -25,17 +25,17 @@ public static partial class Extensions
 		_ => (t1, t2, t3).ToValidationFailures()
 	};
 
-	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2, T3>(this (Optional<T1> t1, Optional<T2> t2, Optional<T3> t3) o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2, T3>(this (Result<T1> t1, Result<T2> t2, Result<T3> t3) o)
 		=> [..o.t1.ToValidationFailures(), ..o.t2.ToValidationFailures(), ..o.t3.ToValidationFailures()];
-	public static Optional<(TR1, TR2)> Combine<T, TR1, TR2>(
+	public static Result<(TR1, TR2)> Combine<T, TR1, TR2>(
 		this T v,
-		Func<T, Optional<TR1>> f1,
-		Func<T, Optional<TR2>> f2
+		Func<T, Result<TR1>> f1,
+		Func<T, Result<TR2>> f2
 	) => Combine(f1(v), f2(v));
 
-	private static Optional<(T1, T2)> Combine<T1, T2>(
-		Optional<T1> t1,
-		Optional<T2> t2
+	private static Result<(T1, T2)> Combine<T1, T2>(
+		Result<T1> t1,
+		Result<T2> t2
 	) => (t1, t2) switch
 	{
 		 { t1: Completional<T1> c1, t2: Completional<T2> c2 }  => (c1.Value, c2.Value),
@@ -44,10 +44,10 @@ public static partial class Extensions
 		_ => (t1, t2).ToValidationFailures()
 	};
 
-	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2>(this (Optional<T1> t1, Optional<T2> t2) o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T1, T2>(this (Result<T1> t1, Result<T2> t2) o)
 		=> [..o.t1.ToValidationFailures(), ..o.t2.ToValidationFailures()];
 
-	private static ImmutableList<ValidationFailure> ToValidationFailures<T>(this Optional<T> o)
+	private static ImmutableList<ValidationFailure> ToValidationFailures<T>(this Result<T> o)
 		=> o is Validational<T> v
 			? v.Failures
 			: [];

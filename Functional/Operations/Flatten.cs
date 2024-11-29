@@ -4,8 +4,8 @@ namespace Functional.Operations;
 
 public static partial class Extensions
 {
-	public static Optional<List<T>> Flatten<T>(
-		this List<Optional<T>> values
+	public static Result<List<T>> Flatten<T>(
+		this List<Result<T>> values
 	)
 	{
 		if (values.OfType<Exceptional<T>>().Any())
